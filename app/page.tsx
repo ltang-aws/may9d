@@ -1,52 +1,65 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
+import { useState } from "react";
 import "./../app/app.css";
-import { Amplify } from "aws-amplify";
-import outputs from "@/amplify_outputs.json";
-import "@aws-amplify/ui-react/styles.css";
 
-Amplify.configure(outputs);
-
-const client = generateClient<Schema>();
+interface TrainingMaterial {
+  id: string;
+  title: string;
+  url: string;
+  category: string;
+}
 
 export default function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [materials] = useState<TrainingMaterial[]>([
+    {
+      id: "1",
+      title: "AWS Fundamentals",
+      url: "https://aws.amazon.com/getting-started/",
+      category: "Cloud Computing"
+    },
+    {
+      id: "2",
+      title: "React Documentation",
+      url: "https://reactjs.org/docs/getting-started.html",
+      category: "Frontend Development"
+    },
+    {
+      id: "3",
+      title: "TypeScript Handbook",
+      url: "https://www.typescriptlang.org/docs/",
+      category: "Programming Languages"
+    },
+    // Add more training materials as needed
+  ]);
 
-  function listTodos() {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }
-
-  useEffect(() => {
-    listTodos();
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
-  }
+  const categories = [...new Set(materials.map(material => material.category))];
 
   return (
-    <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
+    <main className="container">
+      <h1 className="title">Training Materials</h1>
+      
+      {categories.map(category => (
+        <div key={category} className="category-section">
+          <h2 className="category-title">{category}</h2>
+          <ul className="materials-list">
+            {materials
+              .filter(material => material.category === category)
+              .map(material => (
+                <li key={material.id} className="material-item">
+                  <a 
+                    href={material.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="material-link"
+                  >
+                    {material.title}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      ))}
     </main>
   );
 }
