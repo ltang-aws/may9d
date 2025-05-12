@@ -47,6 +47,33 @@ export default function App() {
           Review next steps of this tutorial.
         </a>
       </div>
+      
+      {/* Training Resources */}
+      <div className="training-resources">
+        <h3>Additional Training Resources:</h3>
+        <ul>
+          <li>
+            <a href="s3://aws-training/amplify-basics/introduction.pdf">
+              Amplify Basics Introduction
+            </a>
+          </li>
+          <li>
+            <a href="s3://aws-training/react-fundamentals/getting-started.pdf">
+              React Fundamentals
+            </a>
+          </li>
+          <li>
+            <a href="s3://aws-training/aws-amplify-auth/authentication.pdf">
+              AWS Amplify Authentication Guide
+            </a>
+          </li>
+          <li>
+            <a href="s3://aws-training/data-modeling/basics.pdf">
+              Data Modeling with Amplify
+            </a>
+          </li>
+        </ul>
+      </div>
     </main>
   );
 }
