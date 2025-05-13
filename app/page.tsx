@@ -47,13 +47,13 @@ export default function App() {
           Review next steps of this tutorial.
         </a>
       </div>
-      
+
       {/* Training Resources */}
       <div className="training-resources">
         <h3>Additional Training Resources:</h3>
         <ul>
           <li>
-            <a href="s3://aws-training/amplify-basics/introduction.pdf">
+            <a href="https://aws.amazon.com/amplify/getting-started/">
               Amplify Basics Introduction
             </a>
           </li>
