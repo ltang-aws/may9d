@@ -58,7 +58,7 @@ export default function App() {
             </a>
           </li>
           <li>
-            <a href="s3://aws-training/react-fundamentals/getting-started.pdf">
+            <a href="s3://may9dtraining/amplify-api.pdf">
               React Fundamentals
             </a>
           </li>
